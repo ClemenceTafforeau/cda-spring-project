@@ -6,11 +6,74 @@ public class Product {
     private String name;
     private String description;
     private Double price;
-    private Tax.TaxType tax;
     private String image;
     private int quantity;
 
     public Product() {
         super();
+    }
+
+    // Getters
+
+    public Long getId() {
+        return id;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public Double getPrice() {
+        return price;
+    }
+
+    public String getImage() {
+        return image;
+    }
+
+    public int getQuantity() {
+        return quantity;
+    }
+
+    // Setters
+
+    public void setId(Long pId) {
+        id = pId;
+    }
+
+    public void setName(String pName) {
+        name = pName;
+    }
+
+    public void setDescription(String pDescription) {
+        description = pDescription;
+    }
+
+    public void setPrice(Double pPrice) {
+        price = pPrice;
+    }
+
+    public void setImage(String pImage) {
+        image = pImage;
+    }
+
+    public void setQuantity(int pQuantity) {
+        quantity = pQuantity;
+    }
+
+    @Override
+    public String toString() {
+        return "Product{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", description='" + description + '\'' +
+                ", price=" + price +
+                ", image='" + image + '\'' +
+                ", quantity=" + quantity +
+                '}';
     }
 }
