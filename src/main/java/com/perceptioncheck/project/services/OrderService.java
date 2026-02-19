@@ -3,13 +3,17 @@ package com.perceptioncheck.project.services;
 import com.perceptioncheck.project.exceptions.StockException;
 import com.perceptioncheck.project.models.Order;
 import com.perceptioncheck.project.models.OrderProduct;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
 
+@Service("orders")
 public class OrderService {
 
     private List<Order> orders = new ArrayList<>();
+    @Autowired
     private ProductService productService;
 
     // Getters

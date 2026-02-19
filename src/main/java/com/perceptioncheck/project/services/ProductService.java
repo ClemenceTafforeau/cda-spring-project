@@ -3,11 +3,13 @@ package com.perceptioncheck.project.services;
 import com.perceptioncheck.project.exceptions.ResourceNotFoundException;
 import com.perceptioncheck.project.exceptions.StockException;
 import com.perceptioncheck.project.models.Product;
+import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
+@Service("products")
 public class ProductService {
 
     private final List<Product> products = new ArrayList<>();

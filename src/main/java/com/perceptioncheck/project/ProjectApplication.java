@@ -8,18 +8,20 @@ import com.perceptioncheck.project.services.OrderService;
 import com.perceptioncheck.project.services.ProductService;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.context.ApplicationContext;
-import org.springframework.context.support.ClassPathXmlApplicationContext;
+import org.springframework.context.annotation.AnnotationConfigApplicationContext;
+import org.springframework.context.annotation.ComponentScan;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
 
 @SpringBootApplication
+@ComponentScan("com.*")
 public class ProjectApplication {
 
 	public static void main(String[] args) throws Exception {
 		SpringApplication.run(ProjectApplication.class, args);
-		ApplicationContext context = new ClassPathXmlApplicationContext("services.xml");
+		AnnotationConfigApplicationContext context = new
+		AnnotationConfigApplicationContext(ProjectApplication.class);
 
 		ProductService productService = context.getBean("products", ProductService.class);
 		OrderService orderService = context.getBean("orders", OrderService.class);
@@ -58,5 +60,4 @@ public class ProjectApplication {
 		orderService.pay(order1);
 		System.out.println(order1);
 	}
-
 }
