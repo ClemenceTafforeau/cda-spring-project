@@ -9,8 +9,13 @@ public class Product {
     private String image;
     private int quantity;
 
-    public Product() {
-        super();
+    public Product(Long pId, String pName, String pDescription, Double pPrice, String pImage, int pQuantity) {
+        id = pId;
+        name = pName;
+        description = pDescription;
+        price = pPrice;
+        image = pImage;
+        quantity = pQuantity;
     }
 
     // Getters

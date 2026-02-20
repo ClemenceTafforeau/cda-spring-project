@@ -1,0 +1,29 @@
+<div th:replace="fragments/header.html"></div>
+
+<main role="main">
+
+    <section class="back-section">
+        <a href="/products">Back</a>
+    </section>
+
+    <div class="album py-5 bg-light">
+        <div th:if="${product}" class="single-card-container">
+            <div class="card card-body">
+                <div class="img-title-text-container">
+                    <img class="card-img-top" th:src="@{${'/img/' + product.image}}" alt="Card image cap">
+                    <h2 class="card-title" th:text="${product.name}"></h2>
+                    <p class="card-text" th:text="${product.description}"></p>
+                </div>
+                <div class="d-flex justify-content-end align-items-center">
+                    <p class="card-price" th:text="${product.price + '€'}"></p>
+                </div>
+            </div>
+        </div>
+        <div class="cards-container" th:unless="${product}">
+            <p>Unavailable product</p>
+        </div>
+    </div>
+
+</main>
+
+<div th:replace="fragments/footer.html"></div>

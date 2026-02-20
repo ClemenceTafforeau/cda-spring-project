@@ -1,0 +1,37 @@
+<div th:replace="fragments/header.html"></div>
+
+<main role="main">
+
+    <section class="jumbotron text-center">
+        <div class="container">
+            <h1 class="jumbotron-heading">Products</h1>
+            <p class="lead text-muted">Need a few dice to play with friends or add to your evergrowing collection?
+                Our handcrafted gaming dice are designed for tabletop adventurers who demand both beauty and balance.
+            </p>
+        </div>
+    </section>
+
+    <div class="album py-5 bg-light">
+        <div class="cards-container" th:if="${#lists.isEmpty(products)}">
+            <p>Aucun produit en stock</p>
+        </div>
+        <div class="cards-container" th:unless="${#lists.isEmpty(products)}">
+            <div class="card card-body" th:each="product : ${products}">
+                <div class="img-title-text-container">
+                    <img class="card-img-top" th:src="@{${'/img/' + product.image}}" alt="Card image cap">
+                    <h2 class="card-title" th:text="${product.name}"></h2>
+                    <p class="card-text" th:text="${product.description}"></p>
+                </div>
+                <div class="d-flex justify-content-between align-items-center">
+                    <div class="btn-group">
+                        <a th:href="@{/products/{id}(id=${product.id})}" class="btn btn-sm btn-outline-secondary">View</a>
+                    </div>
+                    <p class="card-price" th:text="${product.price + '€'}"></p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</main>
+
+<div th:replace="fragments/footer.html"></div>
