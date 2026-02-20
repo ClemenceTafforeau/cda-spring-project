@@ -1,15 +1,24 @@
 package com.perceptioncheck.project.models;
 
+import jakarta.persistence.*;
+
 import java.time.LocalDate;
 import java.util.List;
 import java.util.Objects;
 
+@Entity
+@Table(name = "pc_orders")
 public class Order {
 
+    @Id
+    @GeneratedValue(strategy= GenerationType.IDENTITY)
     private Long id;
+    @ManyToOne
+    @JoinColumn(name = "customer_id")
     private Customer customer;
     private LocalDate date;
     private String status;
+    @OneToMany
     private List<OrderProduct> orderProducts;
 
     public enum Status {

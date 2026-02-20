@@ -3,18 +3,19 @@ package com.perceptioncheck.project.services;
 import com.perceptioncheck.project.exceptions.StockException;
 import com.perceptioncheck.project.models.Order;
 import com.perceptioncheck.project.models.OrderProduct;
+import com.perceptioncheck.project.repositories.OrderRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
 import java.util.List;
 
 @Service("orders")
 public class OrderService {
 
-    private List<Order> orders = new ArrayList<>();
     @Autowired
     private ProductService productService;
+    @Autowired
+    private OrderRepository orderRepository;
 
     // Getters
 
@@ -35,7 +36,7 @@ public class OrderService {
      * @return a list of all orders
      */
     public List<Order> getAll() {
-        return orders;
+        return orderRepository.findAll();
     }
 
     /**
@@ -44,8 +45,8 @@ public class OrderService {
      * @return an order
      */
     public Order create(Order pOrder) {
-        pOrder.setStatus("ONGOING");
-        orders.add(pOrder);
+        pOrder.setStatus("PENDING");
+        orderRepository.save(pOrder);
         return pOrder;
     }
 
@@ -54,7 +55,7 @@ public class OrderService {
      * is sufficient. If it isn't, the method fails silently
      */
     public void pay(Order pOrder) {
-        if (pOrder.getStatus().equals("PAID")) {
+        if (pOrder.getStatus().equals("COMPLETED")) {
             return;
         }
 

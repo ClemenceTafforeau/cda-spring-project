@@ -1,8 +1,19 @@
 package com.perceptioncheck.project.models;
 
+import jakarta.persistence.*;
+
+@Entity
+@Table(name = "pc_order_products")
+@IdClass(OrderProductId.class)
 public class OrderProduct {
 
+    @Id
+    @ManyToOne
+    @JoinColumn(name = "order_id")
     private Order order;
+    @Id
+    @ManyToOne
+    @JoinColumn(name = "product_id")
     private Product product;
     private int quantity;
 

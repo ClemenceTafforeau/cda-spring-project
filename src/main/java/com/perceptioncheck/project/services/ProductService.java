@@ -3,23 +3,23 @@ package com.perceptioncheck.project.services;
 import com.perceptioncheck.project.exceptions.ResourceNotFoundException;
 import com.perceptioncheck.project.exceptions.StockException;
 import com.perceptioncheck.project.models.Product;
+import com.perceptioncheck.project.repositories.ProductRepository;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
 import java.util.List;
-import java.util.Objects;
 
 @Service("products")
 public class ProductService {
 
-    private final List<Product> products = new ArrayList<>();
-
+    @Autowired
+    private ProductRepository productRepository;
     /**
      * Returns a list of all products
      * @return a list of all products
      */
     public List<Product> getAll() {
-        return products;
+        return productRepository.findAll();
     }
 
     /**
@@ -28,9 +28,8 @@ public class ProductService {
      * @throws ResourceNotFoundException if the corresponding product cannot be found
      */
     public Product findById(Long pId) throws ResourceNotFoundException {
-        return products.stream()
-                .filter(product -> Objects.equals(product.getId(), pId))
-                .findFirst()
+        return productRepository
+                .findById(pId)
                 .orElseThrow(() -> new ResourceNotFoundException("The corresponding product could not be found."));
     }
 
@@ -47,7 +46,7 @@ public class ProductService {
      * @return the product that was inserted in the DB
      */
     public Product save(Product pProduct) {
-        products.add(pProduct);
+        productRepository.save(pProduct);
         return pProduct;
     }
 

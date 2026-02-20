@@ -1,13 +1,21 @@
 package com.perceptioncheck.project.models;
 
+import jakarta.persistence.*;
+
+@Entity
+@Table(name = "pc_products")
 public class Product {
 
+    @Id
+    @GeneratedValue(strategy= GenerationType.IDENTITY)
     private Long id;
     private String name;
     private String description;
     private Double price;
     private String image;
     private int quantity;
+
+    public Product() {}
 
     public Product(Long pId, String pName, String pDescription, Double pPrice, String pImage, int pQuantity) {
         id = pId;

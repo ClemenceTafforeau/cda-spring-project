@@ -1,0 +1,39 @@
+DROP TABLE IF EXISTS pc_order_products;
+DROP TABLE IF EXISTS pc_orders;
+DROP TABLE IF EXISTS pc_customers;
+DROP TABLE IF EXISTS pc_products;
+DROP TYPE IF EXISTS order_status;
+
+CREATE TYPE order_status AS ENUM ('PENDING', 'IN_PROGRESS', 'COMPLETED', 'CANCELED');
+
+CREATE TABLE pc_products
+(
+	id SERIAL PRIMARY KEY NOT NULL,
+	name VARCHAR(255) NOT NULL,
+	description TEXT NULL,
+	price DECIMAL(8,2) NOT NULL,
+	image VARCHAR(255) NULL,
+	quantity INTEGER NOT NULL
+);
+
+CREATE TABLE pc_customers
+(
+	id SERIAL PRIMARY KEY NOT NULL,
+	email VARCHAR(320) NOT NULL,
+	password VARCHAR(255) NOT NULL
+);
+
+CREATE TABLE pc_orders
+(
+	id SERIAL PRIMARY KEY NOT NULL,
+	date TIMESTAMP NOT NULL,
+	status order_status NOT NULL,
+	customer_id BIGINT REFERENCES pc_customers(id) ON DELETE CASCADE NOT NULL
+);
+
+CREATE TABLE pc_order_products
+(
+	order_id SERIAL REFERENCES pc_orders(id) ON DELETE CASCADE NOT NULL,
+	product_id BIGINT REFERENCES pc_products(id) ON DELETE CASCADE NOT NULL,
+	quantity INTEGER NOT NULL
+);
