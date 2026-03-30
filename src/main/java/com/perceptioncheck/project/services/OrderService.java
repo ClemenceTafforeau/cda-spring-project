@@ -1,5 +1,8 @@
 package com.perceptioncheck.project.services;
 
+import com.perceptioncheck.project.dto.CustomerDTO;
+import com.perceptioncheck.project.dto.OrderDTO;
+import com.perceptioncheck.project.dto.OrderProductDTO;
 import com.perceptioncheck.project.exceptions.StockException;
 import com.perceptioncheck.project.models.Order;
 import com.perceptioncheck.project.models.OrderProduct;
@@ -8,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service("orders")
 public class OrderService {
@@ -35,8 +39,17 @@ public class OrderService {
      * Returns a list of all orders
      * @return a list of all orders
      */
-    public List<Order> getAll() {
-        return orderRepository.findAll();
+    public List<OrderDTO> getAll() {
+        return orderRepository.findAll()
+            .stream()
+            .map(order -> {
+                CustomerDTO customer = new CustomerDTO(order.getCustomer().getId(), order.getCustomer().getEmail());
+                List<OrderProductDTO> orderProducts = order.getOrderProducts()
+                        .stream()
+                        .map(orderProduct -> new OrderProductDTO(orderProduct.getProduct(), orderProduct.getQuantity())).toList();
+                return new OrderDTO(order.getId(), order.getDate(), order.getStatus(), customer, orderProducts);
+            })
+            .collect(Collectors.toList());
     }
 
     /**

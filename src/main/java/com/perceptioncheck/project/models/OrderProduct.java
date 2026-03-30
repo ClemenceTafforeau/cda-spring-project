@@ -37,16 +37,16 @@ public class OrderProduct {
 
     // Setters
 
-    public void setOrder(Order pOrder) {
-        order = pOrder;
+    public void setOrder(Order order) {
+        this.order = order;
     }
 
-    public void setProduct(Product pProduct) {
-        product = pProduct;
+    public void setProduct(Product product) {
+        this.product = product;
     }
 
-    public void setQuantity(int pQuantity) {
-        quantity = pQuantity;
+    public void setQuantity(int quantity) {
+        this.quantity = quantity;
     }
 
     // Other methods

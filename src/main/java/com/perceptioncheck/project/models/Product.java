@@ -17,13 +17,13 @@ public class Product {
 
     public Product() {}
 
-    public Product(Long pId, String pName, String pDescription, Double pPrice, String pImage, int pQuantity) {
-        id = pId;
-        name = pName;
-        description = pDescription;
-        price = pPrice;
-        image = pImage;
-        quantity = pQuantity;
+    public Product(Long id, String name, String description, Double price, String image, int quantity) {
+        this.id = id;
+        this.name = name;
+        this.description = description;
+        this.price = price;
+        this.image = image;
+        this.quantity = quantity;
     }
 
     // Getters
@@ -54,28 +54,28 @@ public class Product {
 
     // Setters
 
-    public void setId(Long pId) {
-        id = pId;
+    public void setId(Long id) {
+        this.id = id;
     }
 
-    public void setName(String pName) {
-        name = pName;
+    public void setName(String name) {
+        this.name = name;
     }
 
-    public void setDescription(String pDescription) {
-        description = pDescription;
+    public void setDescription(String description) {
+        this.description = description;
     }
 
-    public void setPrice(Double pPrice) {
-        price = pPrice;
+    public void setPrice(Double price) {
+        this.price = price;
     }
 
-    public void setImage(String pImage) {
-        image = pImage;
+    public void setImage(String image) {
+        this.image = image;
     }
 
-    public void setQuantity(int pQuantity) {
-        quantity = pQuantity;
+    public void setQuantity(int quantity) {
+        this.quantity = quantity;
     }
 
     @Override

@@ -2,7 +2,7 @@ package com.perceptioncheck.project.models;
 
 import jakarta.persistence.*;
 
-import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Objects;
 
@@ -16,7 +16,7 @@ public class Order {
     @ManyToOne
     @JoinColumn(name = "customer_id")
     private Customer customer;
-    private LocalDate date;
+    private LocalDateTime date;
     private String status;
     @OneToMany
     private List<OrderProduct> orderProducts;
@@ -47,7 +47,7 @@ public class Order {
         return customer;
     }
 
-    public LocalDate getDate() {
+    public LocalDateTime getDate() {
         return date;
     }
 
@@ -61,24 +61,24 @@ public class Order {
 
     // Setters
 
-    public void setId(Long pId) {
-        id = pId;
+    public void setId(Long id) {
+        this.id = id;
     }
 
-    public void setCustomer(Customer pCustomer) {
-        customer = pCustomer;
+    public void setCustomer(Customer customer) {
+        this.customer = customer;
     };
 
-    public void setDate(LocalDate pDate) {
-        date = pDate;
+    public void setDate(LocalDateTime date) {
+        this.date = date;
     }
 
-    public void setStatus(String pStatus) {
-        status = pStatus;
+    public void setStatus(String status) {
+        this.status = status;
     };
 
-    public void setOrderProducts(List<OrderProduct> pOrderProducts) {
-        orderProducts = pOrderProducts;
+    public void setOrderProducts(List<OrderProduct> orderProducts) {
+        this.orderProducts = orderProducts;
     }
 
     /**
