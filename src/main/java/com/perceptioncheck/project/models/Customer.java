@@ -2,6 +2,8 @@ package com.perceptioncheck.project.models;
 
 import jakarta.persistence.*;
 
+import java.util.Set;
+
 @Entity
 @Table(name = "pc_customers")
 public class Customer {
@@ -11,6 +13,13 @@ public class Customer {
     private Long id;
     private String email;
     private String password;
+    @JoinTable(
+        name = "pc_customer_roles",
+        joinColumns = @JoinColumn(name = "customer_id", referencedColumnName = "id"),
+        inverseJoinColumns = @JoinColumn(name = "role_id", referencedColumnName = "id")
+    )
+    @ManyToMany(fetch = FetchType.EAGER)
+    private Set<Role> roles;
 
     public Customer() {
         super();
@@ -30,6 +39,8 @@ public class Customer {
         return password;
     }
 
+    public Set<Role> getRoles() { return roles; }
+
     // Setters
 
     public void setId(Long id) {
@@ -44,12 +55,17 @@ public class Customer {
         this.password = password;
     }
 
+    public void setRoles(Set<Role> roles) { this.roles = roles; }
+
+    // Overriding methods
+
     @Override
     public String toString() {
         return "Customer{" +
                 "id=" + id +
                 ", email='" + email + '\'' +
                 ", password='" + password + '\'' +
+                ", roles='" + roles + '\'' +
                 '}';
     }
 }

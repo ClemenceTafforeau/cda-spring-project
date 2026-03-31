@@ -1,0 +1,18 @@
+<div th:replace="fragments/header.html"></div>
+
+<main>
+
+    <section class="jumbotron text-center">
+        <div class="container">
+            <h1 class="jumbotron-heading">Log out</h1>
+            <form class="form-signin"
+                  th:action="@{/logout}"
+                  method="post">
+                <input type="submit" class="btn btn-primary my-2" value="Log out"/>
+            </form>
+        </div>
+    </section>
+
+</main>
+
+<div th:replace="fragments/footer.html"></div>

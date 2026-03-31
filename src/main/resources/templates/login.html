@@ -1,0 +1,28 @@
+<div th:replace="fragments/header.html"></div>
+
+<main>
+
+    <section class="jumbotron text-center">
+        <div class="container">
+            <h1 class="jumbotron-heading">Log in</h1>
+            <p th:if="${param.error}">Invalid username and password</p>
+            <form class="form-signin"
+                  th:action="@{/login}"
+                  method="post">
+                <label class="form-label">
+                    <span>Username<sup>*</sup></span>
+                    <input type="text" id="username" name="username" required/>
+                </label>
+                <label class="form-label">
+                    <span>Password<sup>*</sup></span>
+                    <input type="password" id="password" name="password" required/>
+                </label>
+                <a th:href="@{/password/update}">Forgot your password ?</a>
+                <input type="submit" class="btn btn-primary my-2" value="Submit"/>
+            </form>
+        </div>
+    </section>
+
+</main>
+
+<div th:replace="fragments/footer.html"></div>

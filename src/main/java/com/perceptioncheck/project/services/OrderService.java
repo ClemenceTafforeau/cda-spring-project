@@ -43,7 +43,7 @@ public class OrderService {
         return orderRepository.findAll()
             .stream()
             .map(order -> {
-                CustomerDTO customer = new CustomerDTO(order.getCustomer().getId(), order.getCustomer().getEmail());
+                CustomerDTO customer = new CustomerDTO(order.getCustomer().getId(), order.getCustomer().getEmail(), order.getCustomer().getPassword(), order.getCustomer().getRoles());
                 List<OrderProductDTO> orderProducts = order.getOrderProducts()
                         .stream()
                         .map(orderProduct -> new OrderProductDTO(orderProduct.getProduct(), orderProduct.getQuantity())).toList();
