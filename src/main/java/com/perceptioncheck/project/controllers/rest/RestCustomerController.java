@@ -1,12 +1,10 @@
 package com.perceptioncheck.project.controllers.rest;
 
 import com.perceptioncheck.project.dto.CustomerDTO;
-import com.perceptioncheck.project.dto.PasswordUpdateDTO;
-import com.perceptioncheck.project.exceptions.InvalidOldPasswordException;
 import com.perceptioncheck.project.models.Customer;
 import com.perceptioncheck.project.services.CustomerService;
-import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -25,6 +23,7 @@ public class RestCustomerController {
         return customerService.findByEmail(email);
     }
 
+    @PreAuthorize("principal.isJeanPierre()")
     @GetMapping("/{id}")
     public String findById(@PathVariable Long id, Model model) {
         try {
@@ -33,29 +32,6 @@ public class RestCustomerController {
             return "profile";
         } catch (NullPointerException e) {
             throw new NullPointerException(e.getMessage());
-        }
-    }
-
-    @PostMapping("/password/update")
-    public String updatePassword(
-            HttpServletRequest request,
-            @ModelAttribute PasswordUpdateDTO updatePasswordForm
-    ) {
-        try {
-            CustomerDTO customer = customerService.findByEmail(updatePasswordForm.getUsername());
-
-             if (!customerService.checkIfValidFormerPassword(customer, updatePasswordForm.getFormerPassword())) {
-                throw new InvalidOldPasswordException("Invalid credentials");
-             }
-
-            boolean success = customerService.changeCustomerPassword(customer, updatePasswordForm.getPassword());
-            if (success) {
-                return "login";
-            } else {
-                return "update-password";
-            }
-        } catch (NullPointerException e) {
-            return "update-password";
         }
     }
 

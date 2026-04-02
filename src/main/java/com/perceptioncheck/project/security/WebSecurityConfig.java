@@ -18,12 +18,13 @@ import java.util.Map;
 @EnableWebSecurity
 public class WebSecurityConfig {
 
-    private final String[] PUBLIC_MATCHERS = {"/", "/login", "/password/update", "/api/customers", "/api/customers/password/update", "/home", "/products", "/products/**", "/img/**", "/styles/**"};
+    private final String[] PUBLIC_MATCHERS = {"/", "/login", "/register", "/password/update", "/home", "/products", "/products/**", "/img/**", "/styles/**"};
 
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         try {
             http.authorizeHttpRequests(authorize -> authorize
+                .requestMatchers("/api/**").hasRole("ADMIN")
                 .requestMatchers(PUBLIC_MATCHERS).permitAll()
                 .dispatcherTypeMatchers(DispatcherType.FORWARD).permitAll()
                 .anyRequest().authenticated()

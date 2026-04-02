@@ -11,4 +11,6 @@ import java.util.Optional;
 public interface CustomerRepository extends JpaRepository<Customer, Long> {
     @Query("SELECT c FROM Customer c LEFT JOIN FETCH c.roles WHERE c.email = :email")
     Optional<Customer> findByEmailWithRoles(String email);
+
+    Optional<Customer> findByEmail(String email);
 }

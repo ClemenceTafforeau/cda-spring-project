@@ -2,6 +2,7 @@ package com.perceptioncheck.project.services;
 
 import com.perceptioncheck.project.adapters.CustomerAdapter;
 import com.perceptioncheck.project.dto.CustomerDTO;
+import com.perceptioncheck.project.dto.RegisterDTO;
 import com.perceptioncheck.project.exceptions.ResourceNotFoundException;
 import com.perceptioncheck.project.models.Customer;
 import com.perceptioncheck.project.repositories.CustomerRepository;
@@ -85,12 +86,26 @@ public class CustomerService implements UserDetailsService {
         }
     }
 
+    public boolean registerNewCustomer(RegisterDTO pRegisterDTO) {
+        Optional<Customer> customer = customerRepository.findByEmail(pRegisterDTO.getUsername());
+        if (customer.isPresent()) {
+            return false;
+        } else {
+            Customer newCustomer = new Customer(pRegisterDTO.getUsername(), passwordEncoder.encode(pRegisterDTO.getPassword()));
+            try {
+                customerRepository.save(newCustomer);
+                return true;
+            } catch (Exception e) {
+                return false;
+            }
+        }
+    }
+
     @Override
     @NullMarked
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         try {
             CustomerDTO customer = findByEmail(username);
-            System.out.println(passwordEncoder.encode(customer.getPassword()));
             return findByEmail(username);
         } catch (Exception e) {
             throw new UsernameNotFoundException(e.getMessage());

@@ -1,5 +1,6 @@
 package com.perceptioncheck.project.dto;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.perceptioncheck.project.models.Role;
 import org.jspecify.annotations.NullMarked;
 import org.springframework.security.core.GrantedAuthority;
@@ -54,6 +55,7 @@ public class CustomerDTO implements UserDetails {
 
     public void setRoles(Set<Role> roles) { this.roles = roles; }
 
+    @JsonIgnore
     @Override
     @NullMarked
     public List<? extends GrantedAuthority> getAuthorities() {

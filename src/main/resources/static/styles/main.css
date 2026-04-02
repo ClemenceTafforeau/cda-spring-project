@@ -94,7 +94,7 @@ footer p {
     font-weight: bold;
 }
 
-.container:has(.form-signin), .container:has(.form-password) {
+.container:has(.auth-form) {
     display: flex;
     flex-direction: column;
     gap: 1rem;
@@ -102,7 +102,7 @@ footer p {
     align-items: center;
 }
 
-.form-signin, .form-password {
+.auth-form {
     display: flex;
     flex-direction: column;
     gap: 1rem;
@@ -116,7 +116,7 @@ form:has(.form-label) {
     align-items: center;
 }
 
-.form-signin .btn, .form-password .btn {
+.auth-form .btn {
     margin-inline-start: auto;
 }
 

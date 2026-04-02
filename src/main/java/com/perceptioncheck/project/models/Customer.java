@@ -25,6 +25,11 @@ public class Customer {
         super();
     }
 
+    public Customer(String pEmail, String pPassword) {
+        email = pEmail;
+        password = pPassword;
+    }
+
     // Getters
 
     public Long getId() {
