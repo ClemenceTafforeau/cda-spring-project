@@ -8,7 +8,7 @@ import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import java.util.ArrayList;
-import java.util.Set;
+import java.util.List;
 import java.util.List;
 
 public class CustomerDTO implements UserDetails {
@@ -16,9 +16,9 @@ public class CustomerDTO implements UserDetails {
     private Long id;
     private String email;
     private String password;
-    private Set<Role> roles;
+    private List<Role> roles;
 
-    public CustomerDTO(Long id, String email, String password, Set<Role> roles) {
+    public CustomerDTO(Long id, String email, String password, List<Role> roles) {
         this.id = id;
         this.email = email;
         this.password = password;
@@ -51,15 +51,15 @@ public class CustomerDTO implements UserDetails {
         this.password = password;
     }
 
-    public Set<Role> getRoles() { return roles; }
+    public List<Role> getRoles() { return roles; }
 
-    public void setRoles(Set<Role> roles) { this.roles = roles; }
+    public void setRoles(List<Role> roles) { this.roles = roles; }
 
     @JsonIgnore
     @Override
     @NullMarked
     public List<? extends GrantedAuthority> getAuthorities() {
-        Set<Role> roles = getRoles();
+        List<Role> roles = getRoles();
         List<SimpleGrantedAuthority> authorities = new ArrayList<>();
         for (Role role : roles) {
             authorities.add(new SimpleGrantedAuthority(role.getRole()));

@@ -34,7 +34,7 @@ public class Order {
     }
 
     public Order() {
-        super();
+
     }
 
     // Getters
@@ -113,10 +113,9 @@ public class Order {
         OrderProduct matchInList = getProductIfInList(orderProduct);
 
         if (Objects.isNull(matchInList)) {
-            orderProduct.setOrder(this);
             orderProduct.setProduct(pProduct);
             orderProduct.setQuantity(pQuantity);
-            orderProducts.add(orderProduct);
+            this.orderProducts.add(orderProduct);
         } else {
             matchInList.setQuantity(matchInList.getQuantity() + pQuantity);
         }

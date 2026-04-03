@@ -4,7 +4,7 @@ DROP TABLE IF EXISTS pc_customers;
 DROP TABLE IF EXISTS pc_products;
 DROP TYPE IF EXISTS order_status;
 
-CREATE TYPE order_status AS ENUM ('PENDING', 'IN_PROGRESS', 'COMPLETED', 'CANCELED');
+CREATE TYPE order_status AS ENUM ('PLACED', 'PAID', 'CANCELLED');
 
 CREATE TABLE pc_products
 (

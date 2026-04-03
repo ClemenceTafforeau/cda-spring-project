@@ -14,14 +14,39 @@ a:hover {
     color: #343a40;
 }
 
-.jumbotron {
+.btn-primary {
+    background-color: #435f7a;
+    font-weight: normal;
+    transition: all .5s ease-in-out;
+    border: none;
+}
+
+.btn-primary:hover {
+    background-color: #2a455e;
+    font-weight: normal;
+    border: none;
+}
+
+body, .jumbotron {
+    background-color: #f4f3ee;
+}
+
+#navbarHeader {
+    background-color: #0a0908;
+}
+
+.navbar {
+    background-color: #0a0908;
+}
+
+.home-hero-text .container {
     padding-top: var(--jumbotron-padding-y);
     padding-bottom: var(--jumbotron-padding-y);
     margin-bottom: 0;
-    background-color: #fff;
+    flex-direction: column;
 }
 @media (min-width: 768px) {
-    .jumbotron {
+    .home-hero-text .container {
         padding-top: calc(var(--jumbotron-padding-y) * 2);
         padding-bottom: calc(var(--jumbotron-padding-y) * 2);
     }
@@ -32,11 +57,23 @@ a:hover {
 }
 
 .jumbotron-heading {
-    font-weight: 300;
+    font-weight: 600;
+}
+
+.heading-light {
+    color: #f4f3ee;
+}
+
+.heading-dark {
+    color: #0a0908;
 }
 
 .jumbotron .container {
     max-width: 40rem;
+}
+
+.lead {
+    color: #e0e1dd;
 }
 
 footer {
@@ -85,6 +122,11 @@ footer p {
 .card-price {
     font-size: 24px;
     font-weight: bold;
+    margin: 0;
+}
+
+.card-price-cart-container {
+    gap: 1rem;
 }
 
 .back-section {
@@ -139,4 +181,77 @@ form:has(.form-label) {
 
 .form-label input {
     width: 100%;
+}
+
+.home-hero {
+    position: relative;
+    height: 100vh;
+    overflow: hidden;
+}
+
+.home-hero::after {
+    content: '';
+    background: #171717;
+    background: linear-gradient(75deg,rgba(23, 23, 23, 1) 8%, rgba(23, 23, 23, 0) 100%);
+    z-index: 99;
+    position: absolute;
+    inset: 0;
+}
+
+.home-hero-img {
+    width: 100vw;
+    position: absolute;
+    inset: 0;
+    z-index: 1
+}
+
+.home-hero-text {
+    z-index: 100;
+    position: absolute;
+    inset: 0;
+}
+
+.home-hero-text .lead {
+    max-width: 64ch;
+}
+
+.navbar, .navbar-toggler {
+    color: #f4f3ee;
+}
+
+.header-title-container {
+    gap: 1rem;
+}
+
+.products-heading {
+    background-image: url("/img/products_hero_dice.webp");
+    background-position: center center;
+    position: relative;
+}
+
+.products-heading::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: #171717;
+    background: linear-gradient(0deg,rgba(23, 23, 23, 1) 8%, rgba(23, 23, 23, 0) 100%);
+    z-index: 1;
+}
+
+.products-heading .container {
+    position: relative;
+    z-index: 80;
+}
+
+.products-heading h1 {
+    color: #f4f3ee;
+}
+
+footer {
+    background-color: #0a0908;
+    color: #e0e1dd;
+}
+
+.bg-light {
+    background-color: #f4f3ee !important;
 }

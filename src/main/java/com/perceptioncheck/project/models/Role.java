@@ -11,6 +11,11 @@ public class Role {
     private Long id;
     private String role;
 
+    public Role(Long pId, String pRole) {
+        id = pId;
+        role = pRole;
+    }
+
     // Getters
 
     public Long getId() {

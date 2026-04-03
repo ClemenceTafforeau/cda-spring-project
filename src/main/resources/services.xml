@@ -10,4 +10,6 @@
     <bean id="orders" class="com.perceptioncheck.project.services.OrderService">
         <property name="ProductService" ref="products"/>
     </bean>
+    <bean id="authentication" class="com.perceptioncheck.project.services.AuthenticationService">
+    </bean>
 </beans>

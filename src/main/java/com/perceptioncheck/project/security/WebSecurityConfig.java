@@ -24,6 +24,7 @@ public class WebSecurityConfig {
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         try {
             http.authorizeHttpRequests(authorize -> authorize
+                .requestMatchers("/api/products/add").authenticated()
                 .requestMatchers("/api/**").hasRole("ADMIN")
                 .requestMatchers(PUBLIC_MATCHERS).permitAll()
                 .dispatcherTypeMatchers(DispatcherType.FORWARD).permitAll()

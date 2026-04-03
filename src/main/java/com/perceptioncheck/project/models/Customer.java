@@ -2,7 +2,7 @@ package com.perceptioncheck.project.models;
 
 import jakarta.persistence.*;
 
-import java.util.Set;
+import java.util.List;
 
 @Entity
 @Table(name = "pc_customers")
@@ -19,7 +19,7 @@ public class Customer {
         inverseJoinColumns = @JoinColumn(name = "role_id", referencedColumnName = "id")
     )
     @ManyToMany(fetch = FetchType.EAGER)
-    private Set<Role> roles;
+    private List<Role> roles;
 
     public Customer() {
         super();
@@ -44,7 +44,7 @@ public class Customer {
         return password;
     }
 
-    public Set<Role> getRoles() { return roles; }
+    public List<Role> getRoles() { return roles; }
 
     // Setters
 
@@ -60,7 +60,7 @@ public class Customer {
         this.password = password;
     }
 
-    public void setRoles(Set<Role> roles) { this.roles = roles; }
+    public void setRoles(List<Role> roles) { this.roles = roles; }
 
     // Overriding methods
 

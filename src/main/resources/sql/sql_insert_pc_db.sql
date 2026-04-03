@@ -19,16 +19,16 @@ INSERT INTO pc_products (name, description, price, image, quantity) VALUES
 ('Dwarven Forge Dice Set', 'A sturdy 7-piece dice set in metallic gray with runic numbering, ideal for warriors and dwarven characters.', 27.99, 'dice_6.webp', 15);
 
 INSERT INTO pc_orders (date, status, customer_id) VALUES
-('2026-02-15 10:30:00', 'COMPLETED', 1),
-('2026-02-16 14:15:00', 'IN_PROGRESS', 2),
-('2026-02-17 09:45:00', 'PENDING', 3),
-('2026-02-18 16:20:00', 'COMPLETED', 4),
-('2026-02-19 11:00:00', 'CANCELED', 5),
-('2026-02-20 13:30:00', 'IN_PROGRESS', 6),
-('2026-02-21 08:15:00', 'PENDING', 7),
-('2026-02-22 15:40:00', 'COMPLETED', 8),
-('2026-02-23 12:05:00', 'IN_PROGRESS', 9),
-('2026-02-24 17:25:00', 'PENDING', 10);
+('2026-02-15 10:30:00', 'PAID', 1),
+('2026-02-16 14:15:00', 'PLACED', 2),
+('2026-02-17 09:45:00', 'PLACED', 3),
+('2026-02-18 16:20:00', 'PAID', 4),
+('2026-02-19 11:00:00', 'CANCELLED', 5),
+('2026-02-20 13:30:00', 'PLACED', 6),
+('2026-02-21 08:15:00', 'PLACED', 7),
+('2026-02-22 15:40:00', 'PAID', 8),
+('2026-02-23 12:05:00', 'PLACED', 9),
+('2026-02-24 17:25:00', 'CANCELLED', 10);
 
 INSERT INTO pc_order_products (order_id, product_id, quantity) VALUES
 (1, 1, 2),

@@ -28,6 +28,7 @@ public class ProductService {
      * @throws ResourceNotFoundException if the corresponding product cannot be found
      */
     public Product findById(Long pId) throws ResourceNotFoundException {
+        System.out.println(pId);
         return productRepository
                 .findById(pId)
                 .orElseThrow(() -> new ResourceNotFoundException("The corresponding product could not be found."));

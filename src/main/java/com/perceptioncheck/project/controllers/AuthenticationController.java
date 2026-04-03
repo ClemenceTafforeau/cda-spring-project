@@ -4,6 +4,7 @@ import com.perceptioncheck.project.dto.CustomerDTO;
 import com.perceptioncheck.project.dto.PasswordUpdateDTO;
 import com.perceptioncheck.project.dto.RegisterDTO;
 import com.perceptioncheck.project.exceptions.InvalidOldPasswordException;
+import com.perceptioncheck.project.models.Customer;
 import com.perceptioncheck.project.services.CustomerService;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.validation.Valid;
@@ -81,14 +82,12 @@ public class AuthenticationController {
     public String register(@ModelAttribute @Valid RegisterDTO registerDTO, BindingResult bindingResult) {
         try {
             if (bindingResult.hasErrors()) {
-                System.out.println(registerDTO.getUsername() + registerDTO.getPassword() + registerDTO.getConfirmPassword());
-                System.out.println(bindingResult);
                 return "register";
             }
 
-            boolean success = customerService.registerNewCustomer(registerDTO);
+            Customer customer = customerService.registerNewCustomer(registerDTO);
 
-            return success ? "login" : "register";
+            return customer != null ? "login" : "register";
         } catch (Exception e) {
             return "register";
         }

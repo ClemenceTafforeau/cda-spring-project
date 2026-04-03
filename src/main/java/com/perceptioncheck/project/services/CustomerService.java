@@ -3,8 +3,10 @@ package com.perceptioncheck.project.services;
 import com.perceptioncheck.project.adapters.CustomerAdapter;
 import com.perceptioncheck.project.dto.CustomerDTO;
 import com.perceptioncheck.project.dto.RegisterDTO;
+import com.perceptioncheck.project.exceptions.ExistingAccountException;
 import com.perceptioncheck.project.exceptions.ResourceNotFoundException;
 import com.perceptioncheck.project.models.Customer;
+import com.perceptioncheck.project.models.Role;
 import com.perceptioncheck.project.repositories.CustomerRepository;
 import org.jspecify.annotations.NullMarked;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,6 +17,7 @@ import org.springframework.security.crypto.factory.PasswordEncoderFactories;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -86,17 +89,19 @@ public class CustomerService implements UserDetailsService {
         }
     }
 
-    public boolean registerNewCustomer(RegisterDTO pRegisterDTO) {
+    public Customer registerNewCustomer(RegisterDTO pRegisterDTO) throws Exception {
         Optional<Customer> customer = customerRepository.findByEmail(pRegisterDTO.getUsername());
         if (customer.isPresent()) {
-            return false;
+            throw new ExistingAccountException("An account with this username already exists");
         } else {
             Customer newCustomer = new Customer(pRegisterDTO.getUsername(), passwordEncoder.encode(pRegisterDTO.getPassword()));
             try {
-                customerRepository.save(newCustomer);
-                return true;
+                List<Role> roles = new ArrayList<>();
+                roles.add(new Role(2L, "ROLE_CUSTOMER"));
+                newCustomer.setRoles(roles);
+                return customerRepository.save(newCustomer);
             } catch (Exception e) {
-                return false;
+                throw new Exception("An error occurred");
             }
         }
     }
